@@ -1,0 +1,43 @@
+﻿@model BmiCalcWeb.Models.WebPageModel
+@{
+    ViewData["Title"] = "BMI-Calculator";
+}
+
+<div>
+    <h1 class="display-4">BMI-Calculator</h1>
+    <form method="post">
+        <div>
+            <input type="radio" asp-for="measurementSystem" value="US"/>
+            <label asp-for="measurementSystem">US</label>
+        </div>
+        <div>
+            <input type="radio" asp-for="measurementSystem" value="Metric"/>
+            <label asp-for="measurementSystem">Metric</label>
+        </div>
+        <div>
+            <input type="text" asp-for="person.Height"/>
+            <label asp-for="person.Height">Height</label>
+        </div>
+        <div>
+            <input type="text" asp-for="person.Weight"/>
+            <label asp-for="person.Weight">Weight</label>
+        </div>
+        <div>
+            <input type="submit" value="Calculate"/>
+        </div>
+        @if(Model?.person?.Bmi != null)
+        {
+            <div>
+                BMI: @(Model.person.Bmi.Value.ToString("F2"))
+            </div>    
+        }
+        @if (Model?.person?.BmiInterpretation != null)
+        {
+            <div>
+                BMI Interpretation: @(Model.person.BmiInterpretation)
+            </div>    
+        }
+        
+    </form>
+    
+</div>
