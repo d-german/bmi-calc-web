@@ -10,13 +10,13 @@ namespace BmiCalcWeb.Models
     public class WebPageModel
     {
         [Required]
-        public Person person { get; set; }
+        public Person Person { get; set; }
         [Required]
-        public MeasurementSystem measurementSystem { get; set; }
+        public MeasurementSystem MeasurementSystem { get; set; }
 
         public WebPageModel()
         {
-            person = new Person();
+            Person = new Person();
         }
 
     }

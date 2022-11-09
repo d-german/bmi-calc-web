@@ -25,7 +25,7 @@ namespace BmiCalcWeb.Controllers
             IInterpretationService interpretationService = new InterpretationService();
             if (ModelState.IsValid)
             {
-                if(model.measurementSystem == MeasurementSystem.US)
+                if(model.MeasurementSystem == MeasurementSystem.US)
                 {
                     calculationService = new USCalculationService();
                 }
@@ -33,8 +33,8 @@ namespace BmiCalcWeb.Controllers
                 {
                     calculationService = new MetricCalculationService();
                 }
-                model.person.Bmi = calculationService.CalculateBmi(model.person);
-                model.person.BmiInterpretation = interpretationService.InterpretBmi(model.person.Bmi.Value);
+                model.Person.Bmi = calculationService.CalculateBmi(model.Person);
+                model.Person.BmiInterpretation = interpretationService.InterpretBmi(model.Person.Bmi.Value);
             }
             
             return View(model);

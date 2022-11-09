@@ -7,34 +7,34 @@
     <h1 class="display-4">BMI-Calculator</h1>
     <form method="post">
         <div>
-            <input type="radio" asp-for="measurementSystem" value="US"/>
-            <label asp-for="measurementSystem">US</label>
+            <input type="radio" asp-for="MeasurementSystem" value="US"/>
+            <label asp-for="MeasurementSystem">US</label>
         </div>
         <div>
-            <input type="radio" asp-for="measurementSystem" value="Metric"/>
-            <label asp-for="measurementSystem">Metric</label>
+            <input type="radio" asp-for="MeasurementSystem" value="Metric"/>
+            <label asp-for="MeasurementSystem">Metric</label>
         </div>
         <div>
-            <input type="text" asp-for="person.Height"/>
-            <label asp-for="person.Height">Height</label>
+            <input type="text" asp-for="Person.Height"/>
+            <label asp-for="Person.Height">Height</label>
         </div>
         <div>
-            <input type="text" asp-for="person.Weight"/>
-            <label asp-for="person.Weight">Weight</label>
+            <input type="text" asp-for="Person.Weight"/>
+            <label asp-for="Person.Weight">Weight</label>
         </div>
         <div>
             <input type="submit" value="Calculate"/>
         </div>
-        @if(Model?.person?.Bmi != null)
+        @if(Model?.Person?.Bmi != null)
         {
             <div>
-                BMI: @(Model.person.Bmi.Value.ToString("F2"))
+                BMI: @(Model.Person.Bmi.Value.ToString("F2"))
             </div>    
         }
-        @if (Model?.person?.BmiInterpretation != null)
+        @if (Model?.Person?.BmiInterpretation != null)
         {
             <div>
-                BMI Interpretation: @(Model.person.BmiInterpretation)
+                BMI Interpretation: @(Model.Person.BmiInterpretation)
             </div>    
         }
         
