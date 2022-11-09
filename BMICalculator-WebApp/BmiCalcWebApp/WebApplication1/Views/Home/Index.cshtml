@@ -2,25 +2,25 @@
 @{
     ViewData["Title"] = "BMI-Calculator";
 }
-
+<script src="lib/jquery/dist/jquery.min.js"></script>
 <div>
     <h1 class="display-4">BMI-Calculator</h1>
     <form method="post">
         <div>
-            <input type="radio" asp-for="MeasurementSystem" value="US"/>
+            <input type="radio" checked asp-for="MeasurementSystem" value="US" class="radio" id="radioUs"/>
             <label asp-for="MeasurementSystem">US</label>
         </div>
         <div>
-            <input type="radio" asp-for="MeasurementSystem" value="Metric"/>
+            <input type="radio" asp-for="MeasurementSystem" value="Metric" class="radio" id="radioMetric"/>
             <label asp-for="MeasurementSystem">Metric</label>
         </div>
         <div>
             <input type="text" asp-for="Person.Height"/>
-            <label asp-for="Person.Height">Height</label>
+            <label id="heightLabel" asp-for="Person.Height">Height(in)</label>
         </div>
         <div>
             <input type="text" asp-for="Person.Weight"/>
-            <label asp-for="Person.Weight">Weight</label>
+            <label id="weightLabel" asp-for="Person.Weight">Weight(lb)</label>
         </div>
         <div>
             <input type="submit" value="Calculate"/>
@@ -37,6 +37,21 @@
                 BMI Interpretation: @(Model.Person.BmiInterpretation)
             </div>    
         }
+
+ <script type="text/javascript">
+        $('.radio').change(function(){
+           if( $('#radioUs:checked').length) {
+               
+               $('#heightLabel').text("Height(in)");
+               $('#weightLabel').text("Weight(lb)");
+           }
+          if( $('#radioMetric:checked').length) {
+              
+               $('#heightLabel').text("Height(cm)");
+               $('#weightLabel').text("Weight(kg)");
+          }
+        });
+ </script>
         
     </form>
     
