@@ -3,10 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BmiCalcWeb.Models
 {
-    public enum MeasurementSystem
-    {
-        Metric, US
-    }
     public class WebPageModel
     {
         [Required]

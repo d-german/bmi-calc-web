@@ -1,10 +1,8 @@
 ﻿using BmiCalcWeb.ConceptModels;
 
-namespace BmiCalcWeb.Services
-{
-    public interface ICalculationService
-    {
-        public double CalculateBmi(Person person);
+namespace BmiCalcWeb.Services;
 
-    }
+public interface ICalculationService
+{
+    public double CalculateBmi(Person person);
 }

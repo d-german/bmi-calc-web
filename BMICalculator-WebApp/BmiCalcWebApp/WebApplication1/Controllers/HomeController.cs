@@ -13,30 +13,27 @@ namespace BmiCalcWeb.Controllers
         {
             _logger = logger;
         }
+
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Index(WebPageModel model)
         {
             IInterpretationService interpretationService = new InterpretationService();
             if (ModelState.IsValid)
             {
-                ICalculationService? calculationService = null;
-                if(model.MeasurementSystem == MeasurementSystem.US)
-                {
-                    calculationService = new USCalculationService();
-                }
-                else
-                {
-                    calculationService = new MetricCalculationService();
-                }
+                ICalculationService? calculationService = new CalculationFactory().Create(model.MeasurementSystem);
+                
+                if (calculationService == null) return View(model);
+
                 model.Person.Bmi = calculationService.CalculateBmi(model.Person);
                 model.Person.BmiInterpretation = interpretationService.InterpretBmi(model.Person.Bmi.Value);
             }
-            
+
             return View(model);
         }
 
