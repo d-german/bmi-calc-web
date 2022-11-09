@@ -21,10 +21,10 @@ namespace BmiCalcWeb.Controllers
         [HttpPost]
         public IActionResult Index(WebPageModel model)
         {
-            ICalculationService? calculationService = null;
             IInterpretationService interpretationService = new InterpretationService();
             if (ModelState.IsValid)
             {
+                ICalculationService? calculationService = null;
                 if(model.MeasurementSystem == MeasurementSystem.US)
                 {
                     calculationService = new USCalculationService();
