@@ -29,8 +29,7 @@ namespace BmiCalcWeb.Controllers
             _logger.LogInformation(model.ToString());
             try
             {
-                var person = _bmiRepository.GetBmi(model.Person, model.MeasurementSystem);
-                model.Person = person;
+                model.Person = _bmiRepository.GetBmi(model.Person, model.MeasurementSystem);
 
                 _logger.LogInformation(model.ToString());
 
