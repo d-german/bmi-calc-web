@@ -6,14 +6,8 @@ namespace BmiCalcWeb.Models
     public record WebPageModel
     {
         [Required]
-        public Person Person { get; set; }
+        public Person Person { get; init; } = new ();
         [Required]
-        public MeasurementSystem MeasurementSystem { get; set; }
-
-        public WebPageModel()
-        {
-            Person = new Person();
-        }
-
+        public MeasurementSystem MeasurementSystem { get; init; }
     }
 }
