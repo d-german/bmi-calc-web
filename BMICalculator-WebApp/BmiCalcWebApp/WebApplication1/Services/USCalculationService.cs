@@ -4,9 +4,9 @@ namespace BmiCalcWeb.Services
 {
     public class USCalculationService : ICalculationService
     {
-        public double CalculateBmi(Person person)
+        public Task<double> CalculateBmiAsync(Person person)
         {
-            return 703 * ((double)person.Weight / (person.Height * person.Height));
+            return Task.FromResult(703 * ((double)person.Weight / (person.Height * person.Height))); //blocking call
         }
     }
 }

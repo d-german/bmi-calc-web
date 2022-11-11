@@ -8,7 +8,7 @@ public class BMIInterpreterTest
     public void BMIInterpreterTests(double value, string expectedResult)
     {
         var interpreter = new BmiCalcWeb.Services.InterpretationService();
-        var actualResult = interpreter.InterpretBmi(value);
+        var actualResult = interpreter.InterpretBmiAsync(value);
         Assert.That(actualResult, Is.EqualTo(expectedResult));
     }
 }

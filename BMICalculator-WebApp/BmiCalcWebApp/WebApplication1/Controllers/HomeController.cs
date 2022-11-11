@@ -24,12 +24,12 @@ namespace BmiCalcWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(WebPageModel model)
+        public async Task<IActionResult> Index(WebPageModel model)
         {
             _logger.LogInformation(model.ToString());
             try
             {
-                model = model with { Person = _bmiRepository.GetBmi(model.Person, model.MeasurementSystem) };
+                model = model with { Person = await _bmiRepository.GetBmiAsync(model.Person, model.MeasurementSystem) };
 
                 _logger.LogInformation(model.ToString());
 

@@ -2,6 +2,6 @@
 {
     public interface IInterpretationService
     {
-        public string InterpretBmi(double bmi);
+        public Task<string> InterpretBmiAsync(double bmi);
     }
 }

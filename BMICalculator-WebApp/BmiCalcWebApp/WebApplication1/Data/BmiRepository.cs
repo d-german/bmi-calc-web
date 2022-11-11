@@ -15,13 +15,13 @@ public class BmiRepository : IBmiRepository
         _interpretationService = interpretationService ?? throw new ArgumentNullException(nameof(interpretationService));
     }
 
-    public Person GetBmi(Person person, MeasurementSystem measurementSystem)
+    public async Task<Person> GetBmiAsync(Person person, MeasurementSystem measurementSystem)
     {
         var calculationService = _calculationFactory.Create(measurementSystem);
 
-        var personResponse = person with { Bmi = calculationService?.CalculateBmi(person) };
+        var personResponse = person with { Bmi = await calculationService?.CalculateBmiAsync(person) };
 
-        if (personResponse.Bmi != null) personResponse = personResponse with { BmiInterpretation = _interpretationService.InterpretBmi(personResponse.Bmi.Value) };
+        if (personResponse.Bmi != null) personResponse = personResponse with { BmiInterpretation = await _interpretationService.InterpretBmiAsync(personResponse.Bmi.Value) };
 
         return personResponse;
     }

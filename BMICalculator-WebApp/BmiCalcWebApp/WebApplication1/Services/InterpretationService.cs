@@ -2,16 +2,16 @@
 {
     public class InterpretationService : IInterpretationService
     {
-        public string InterpretBmi(double bmi)
+        public Task<string> InterpretBmiAsync(double bmi)
         {
-            return bmi switch
+            return Task.FromResult(bmi switch //blocking call
             {
                 < 18.5 => "Under Weight",
                 < 24.9 => "Normal",
                 < 29.9 => "Overweight",
                 > 29.9 => "Obese",
                 _ => string.Empty
-            };
+            });
         }
     }
 }

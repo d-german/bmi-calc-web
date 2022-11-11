@@ -4,5 +4,5 @@ namespace BmiCalcWeb.Services;
 
 public interface ICalculationService
 {
-    public double CalculateBmi(Person person);
+    public Task<double> CalculateBmiAsync(Person person);
 }

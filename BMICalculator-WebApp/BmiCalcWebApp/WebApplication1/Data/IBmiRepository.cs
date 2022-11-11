@@ -5,5 +5,5 @@ namespace BmiCalcWeb.Data;
 
 public interface IBmiRepository
 {
-    Person GetBmi(Person person, MeasurementSystem measurement);
+    Task<Person> GetBmiAsync(Person person, MeasurementSystem measurement);
 }
