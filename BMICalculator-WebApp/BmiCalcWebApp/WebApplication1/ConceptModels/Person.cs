@@ -2,7 +2,7 @@
 
 namespace BmiCalcWeb.ConceptModels
 {
-    public class Person
+    public record Person
     {
         [Required]
         public int Height { get; set; }

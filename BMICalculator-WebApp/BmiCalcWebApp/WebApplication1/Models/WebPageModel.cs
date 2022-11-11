@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BmiCalcWeb.Models
 {
-    public class WebPageModel
+    public record WebPageModel
     {
         [Required]
         public Person Person { get; set; }

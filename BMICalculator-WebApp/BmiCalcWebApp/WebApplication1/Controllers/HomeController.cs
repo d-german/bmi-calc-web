@@ -21,22 +21,34 @@ namespace BmiCalcWeb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            _logger.LogInformation("Index page visited");
             return View();
         }
 
         [HttpPost]
         public IActionResult Index(WebPageModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            _logger.LogInformation(model.ToString());
+            try
+            {
+                if (!ModelState.IsValid) return View(model);
             
-            var calculationService = _calculationFactory.Create(model.MeasurementSystem);
+                var calculationService = _calculationFactory.Create(model.MeasurementSystem);
 
-            if (calculationService == null) return View(model);
+                if (calculationService == null) return View(model);
 
-            model.Person.Bmi = calculationService.CalculateBmi(model.Person);
-            model.Person.BmiInterpretation = _interpretationService.InterpretBmi(model.Person.Bmi.Value);
+                model.Person.Bmi = calculationService.CalculateBmi(model.Person);
+                model.Person.BmiInterpretation = _interpretationService.InterpretBmi(model.Person.Bmi.Value);
+            
+                _logger.LogInformation(model.ToString());
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Request encountered an error, {StatusCodes.Status500InternalServerError} response sent.");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         public IActionResult Privacy()
