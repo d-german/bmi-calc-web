@@ -1,3 +1,4 @@
+using BmiCalcWeb.Data;
 using BmiCalcWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<ICalculationFactory, CalculationFactory>();
 builder.Services.AddSingleton<IInterpretationService, InterpretationService>();
+builder.Services.AddSingleton<IBmiRepository, BmiRepository>();
 
 var app = builder.Build();
 

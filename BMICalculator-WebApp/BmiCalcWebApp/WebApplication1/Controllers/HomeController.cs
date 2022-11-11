@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using BmiCalcWeb.Data;
 using BmiCalcWeb.Models;
-using BmiCalcWeb.Services;
 
 namespace BmiCalcWeb.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ICalculationFactory _calculationFactory;
-        private readonly IInterpretationService _interpretationService;
+        private readonly IBmiRepository _bmiRepository;
 
-        public HomeController(ILogger<HomeController> logger, ICalculationFactory calculationFactory, IInterpretationService interpretationService)
+        public HomeController(ILogger<HomeController> logger, IBmiRepository bmiRepository)
         {
-            _logger = logger;
-            _calculationFactory = calculationFactory;
-            _interpretationService = interpretationService;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _bmiRepository = bmiRepository ?? throw new ArgumentNullException(nameof(bmiRepository));
         }
 
         [HttpGet]
@@ -31,15 +29,9 @@ namespace BmiCalcWeb.Controllers
             _logger.LogInformation(model.ToString());
             try
             {
-                if (!ModelState.IsValid) return View(model);
-            
-                var calculationService = _calculationFactory.Create(model.MeasurementSystem);
+                var person = _bmiRepository.GetBmi(model.Person, model.MeasurementSystem);
+                model.Person = person;
 
-                if (calculationService == null) return View(model);
-
-                model.Person.Bmi = calculationService.CalculateBmi(model.Person);
-                model.Person.BmiInterpretation = _interpretationService.InterpretBmi(model.Person.Bmi.Value);
-            
                 _logger.LogInformation(model.ToString());
 
                 return View(model);
