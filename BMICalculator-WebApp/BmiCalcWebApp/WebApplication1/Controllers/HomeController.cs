@@ -27,15 +27,14 @@ namespace BmiCalcWeb.Controllers
         [HttpPost]
         public IActionResult Index(WebPageModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var calculationService = _calculationFactory.Create(model.MeasurementSystem);
+            if (!ModelState.IsValid) return View(model);
+            
+            var calculationService = _calculationFactory.Create(model.MeasurementSystem);
 
-                if (calculationService == null) return View(model);
+            if (calculationService == null) return View(model);
 
-                model.Person.Bmi = calculationService.CalculateBmi(model.Person);
-                model.Person.BmiInterpretation = _interpretationService.InterpretBmi(model.Person.Bmi.Value);
-            }
+            model.Person.Bmi = calculationService.CalculateBmi(model.Person);
+            model.Person.BmiInterpretation = _interpretationService.InterpretBmi(model.Person.Bmi.Value);
 
             return View(model);
         }
