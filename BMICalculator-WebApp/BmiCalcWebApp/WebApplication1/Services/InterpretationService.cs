@@ -4,6 +4,7 @@
     {
         public string InterpretBmi(double bmi)
         {
+            Thread.Sleep(100);
             return bmi switch
             {
                 < 18.5 => "Under Weight",
