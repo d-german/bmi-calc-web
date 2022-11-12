@@ -4,7 +4,7 @@
     {
         public Task<string> InterpretBmiAsync(double bmi)
         {
-            return Task.FromResult(bmi switch //blocking call
+            return Task.Run(() => bmi switch
             {
                 < 18.5 => "Under Weight",
                 < 24.9 => "Normal",
