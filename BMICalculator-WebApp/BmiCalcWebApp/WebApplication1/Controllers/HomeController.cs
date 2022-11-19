@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using BmiCalcWeb.Data;
 using BmiCalcWeb.Models;
 
 namespace BmiCalcWeb.Controllers
 {
+    [SuppressMessage("Usage", "CA2254:Template should be a static expression")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
